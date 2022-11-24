@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 enum ProgressDialogType { Normal, Download }
 
-String _dialogMessage = "Loading...";
 double _progress = 0.0, _maxProgress = 100.0;
 
 Widget? _customBody;
@@ -12,7 +11,6 @@ Alignment _progressWidgetAlignment = Alignment.centerLeft;
 
 TextDirection _direction = TextDirection.ltr;
 
-bool _isShowing = false;
 BuildContext? _context, _dismissingContext;
 ProgressDialogType? _progressDialogType;
 bool _barrierDismissible = true, _showLogs = false;
@@ -31,13 +29,16 @@ Widget _progressWidget = Center(
 class ProgressDialog {
   _Body? _dialog;
 
-  ProgressDialog(BuildContext? context, {ProgressDialogType? type, bool? isDismissible, bool? showLogs, TextDirection? textDirection, Widget? customBody}) {
+  String _dialogMessage = "Loading...";
+  bool _isShowing = false;
+  ProgressDialog(BuildContext? context, {String dialogMessage = "Loading...", ProgressDialogType? type, bool? isDismissible, bool? showLogs, TextDirection? textDirection, Widget? customBody}) {
     _context = context;
     _progressDialogType = type ?? ProgressDialogType.Normal;
     _barrierDismissible = isDismissible ?? false;
     _showLogs = showLogs ?? false;
     _customBody = customBody ?? null;
     _direction = textDirection ?? TextDirection.ltr;
+    _dialogMessage = dialogMessage;
   }
 
   void style(
@@ -107,7 +108,7 @@ class ProgressDialog {
   Future<bool> show() async {
     try {
       if (!_isShowing) {
-        _dialog = new _Body();
+        _dialog = new _Body(_isShowing, _dialogMessage);
         showDialog<dynamic>(
           context: _context!,
           barrierDismissible: _barrierDismissible,
@@ -146,8 +147,12 @@ class ProgressDialog {
 
 // ignore: must_be_immutable
 class _Body extends StatefulWidget {
-  _BodyState _dialog = _BodyState();
-
+  bool _isShowing = false;
+  final String _dialogMessage;
+  late final _BodyState _dialog;
+  _Body(this._isShowing, this._dialogMessage) {
+    _dialog = _BodyState(_isShowing, _dialogMessage);
+  }
   update() {
     _dialog.update();
   }
@@ -163,6 +168,9 @@ class _BodyState extends State<_Body> {
     setState(() {});
   }
 
+  bool _isShowing = false;
+  final String _dialogMessage;
+  _BodyState(this._isShowing, this._dialogMessage);
   @override
   void dispose() {
     _isShowing = false;
