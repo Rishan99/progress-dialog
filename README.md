@@ -1,9 +1,9 @@
 # progress_dialog
-# Fork Repo for progress_dialog
-# Orginal package is discontinued due to several reasons
-## Thanks to fayaz07, Creator of this package, You can find orginal repo here: https://github.com/fayaz07/progress_dialog
-## Updated to latest compatible version and Android Embedding V2 Migrated
-## Null Safety
+## Fork Repo for progress_dialog
+## Orginal package is discontinued due to several reasons
+### Thanks to fayaz07, Creator of this package, You can find orginal repo here: https://github.com/fayaz07/progress_dialog
+### Updated to latest compatible version and Android Embedding V2 Migrated
+### Null Safety
 
 A light weight package to show progress dialog. As it is a stateful widget, you can change the text shown on the dialog dynamically.
 
