@@ -26,7 +26,9 @@ A light weight package to show progress dialog. As it is a stateful widget, you 
 Add the Package
 ```yaml
 dependencies:
-  progress_dialog: ^1.2.4
+  progress_dialog:
+    git:
+      url: https://github.com/Rishan99/progress-dialog
 ```
 
 ## How to use
