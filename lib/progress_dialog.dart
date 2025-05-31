@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 enum ProgressDialogType { Normal, Download }
 
 double _progress = 0.0, _maxProgress = 100.0;
+double _loaderSize = 60.0;
 
 Widget? _customBody;
 
@@ -31,7 +32,7 @@ class ProgressDialog {
 
   String _dialogMessage = "Loading...";
   bool _isShowing = false;
-  ProgressDialog(BuildContext? context, {String dialogMessage = "Loading...", ProgressDialogType? type, bool? isDismissible, bool? showLogs, TextDirection? textDirection, Widget? customBody}) {
+  ProgressDialog(BuildContext? context, {double? loaderSize, String dialogMessage = "Loading...", ProgressDialogType? type, bool? isDismissible, bool? showLogs, TextDirection? textDirection, Widget? customBody}) {
     _context = context;
     _progressDialogType = type ?? ProgressDialogType.Normal;
     _barrierDismissible = isDismissible ?? false;
@@ -39,6 +40,9 @@ class ProgressDialog {
     _customBody = customBody ?? null;
     _direction = textDirection ?? TextDirection.ltr;
     _dialogMessage = dialogMessage;
+    if(loaderSize!=null){
+      _loaderSize=loaderSize;
+    }
   }
 
   void style(
@@ -183,8 +187,8 @@ class _BodyState extends State<_Body> {
     final loader = Align(
       alignment: _progressWidgetAlignment,
       child: SizedBox(
-        width: 60.0,
-        height: 60.0,
+        width: _loaderSize,
+        height: _loaderSize,
         child: _progressWidget,
       ),
     );
