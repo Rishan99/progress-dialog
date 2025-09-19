@@ -84,7 +84,7 @@ class ProgressDialog {
     _messageStyle = messageTextStyle ?? _messageStyle;
     _progressTextStyle = progressTextStyle ?? _progressTextStyle;
 
-    if (_isShowing) _dialog!.update();
+    if (_isShowing) _dialog!.update(_dialogMessage);
   }
 
   bool isShowing() {
@@ -152,13 +152,14 @@ class ProgressDialog {
 // ignore: must_be_immutable
 class _Body extends StatefulWidget {
   bool _isShowing = false;
-  final String _dialogMessage;
+  String _dialogMessage;
   late final _BodyState _dialog;
   _Body(this._isShowing, this._dialogMessage) {
     _dialog = _BodyState(_isShowing, _dialogMessage);
   }
-  update() {
-    _dialog.update();
+  update(String message) {
+    _dialogMessage=message;
+    _dialog.update(message);
   }
 
   @override
@@ -168,12 +169,13 @@ class _Body extends StatefulWidget {
 }
 
 class _BodyState extends State<_Body> {
-  update() {
+  update(String message) {
+    _dialogMessage=message;
     setState(() {});
   }
 
   bool _isShowing = false;
-  final String _dialogMessage;
+  String _dialogMessage;
   _BodyState(this._isShowing, this._dialogMessage);
   @override
   void dispose() {
