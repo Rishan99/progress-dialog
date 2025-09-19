@@ -16,7 +16,7 @@ BuildContext? _context, _dismissingContext;
 ProgressDialogType? _progressDialogType;
 bool _barrierDismissible = true, _showLogs = false;
 
-TextStyle _progressTextStyle = TextStyle(color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w400), _messageStyle = TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.w600);
+TextStyle _progressTextStyle = TextStyle(color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w400), _messageStyle = TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w600);
 
 double _dialogElevation = 8.0, _borderRadius = 8.0;
 Color _backgroundColor = Colors.white;
